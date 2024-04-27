@@ -1,0 +1,39 @@
+{
+  "name": "template",
+  "displayName": "Template",
+  "publisher": "grg",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grgar/vscode-template"
+  },
+  "description": "TODO",
+  "icon": "images/icon-small.png",
+  "version": "0.0.1",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "author": {
+    "name": "grg",
+    "url": "https://grg.app",
+    "email": "vscode@grg.app"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/grgar"
+  },
+  "homepage": "https://github.com/grgar/vscode-template",
+  "qna": "https://github.com/grgar/vscode-template/discussions",
+  "bugs": {
+    "email": "vscode@grg.app",
+    "url": "https://github.com/grgar/vscode-template/issues"
+  },
+  "galleryBanner": {
+    "theme": "light",
+    "color": "#f6f8fa"
+  },
+  "contributes": {
+  }
+}
