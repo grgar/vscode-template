@@ -1,3 +1,5 @@
+# @grgar's VS Code extension makefile (https://github.com/grgar/vscode-template)
+
 .SUFFIXES:
 version = $(shell git describe | tr "-" "." | awk -F. -vOFS=. '{if (NF>3) {NF=3; $$NF++;} print}' | cut -c 2-)
 name = $(notdir $(CURDIR))
