@@ -2,7 +2,7 @@
 
 .SUFFIXES:
 version = $(shell (git describe 2>/dev/null || echo v0.0.0.0) | tr "-" "." | awk -F. -vOFS=. '{if (NF>3) $$3++; print $$1,$$2,$$3}' | cut -c 2-)
-name = $(notdir $(CURDIR))
+name = $(shell node -p "require('./package.json').name")
 vsce-flags =
 suffix =
 
