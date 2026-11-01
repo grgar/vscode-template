@@ -18,8 +18,9 @@ ${name}-${version}-dev.vsix:
 package:
 	npx vsce package ${vsce-flags} ${version}${suffix} --no-git-tag-version --no-update-package-json
 
-# Creates the version commit + tag and pushes them; the Release workflow
-# (.github/workflows/release.yml) takes over from the tag push.
+# Tags the current commit and pushes the tag; the Release workflow
+# (.github/workflows/release.yml) takes over from the tag push. package.json's
+# version is not updated: the release is packaged with the version from the tag.
 release:
-	npm version ${version}
-	git push origin main v${version}
+	git tag -a v${version} -m v${version}
+	git push origin v${version}

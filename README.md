@@ -12,8 +12,8 @@ The main changes are:
 
 Releases run entirely in GitHub Actions ([release.yml](.github/workflows/release.yml)), triggered by pushing a `v*` tag. Either:
 
-- run `make release` locally — computes the next version from `git describe`, creates the version commit and tag with `npm version`, and pushes them, or
-- run the **Release** workflow from the Actions tab, which does the same remotely (an unsigned tag by the github-actions bot; needs `main` to accept its push).
+- run `make release` locally — computes the next version from `git describe`, tags the current commit, and pushes the tag, or
+- run the **Release** workflow from the Actions tab, which does the same remotely on the branch you run it from (an unsigned tag by the github-actions bot).
 
 The workflow then tests, packages, publishes to the Visual Studio Marketplace, and creates a GitHub release with generated notes and the `.vsix` attached. `CHANGELOG.md` is generated from GitHub release notes at build time and ships only inside the `.vsix`, where the Marketplace renders it as the changelog tab — it's never committed.
 

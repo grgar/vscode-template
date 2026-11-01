@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  # workflow_dispatch only: create the version commit + tag via `make release`.
+  # workflow_dispatch only: create and push the tag via `make release`.
   # Tags pushed with GITHUB_TOKEN never trigger workflows, so the release job
   # below runs in this same workflow run instead of via the tag push event.
   tag:
