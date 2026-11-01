@@ -17,6 +17,8 @@ Releases run entirely in GitHub Actions ([release.yml](.github/workflows/release
 
 The workflow then tests, packages, publishes to the Visual Studio Marketplace, and creates a GitHub release with generated notes and the `.vsix` attached. `CHANGELOG.md` is generated from GitHub release notes at build time and ships only inside the `.vsix`, where the Marketplace renders it as the changelog tab — it's never committed.
 
+Pull requests are built by [ci.yml](.github/workflows/ci.yml), which runs the tests and uploads a `.vsix` (versioned `x.y.z-pr.<PR>.<run>`) as a workflow artifact. Download it from the run's summary page and install it with `code --install-extension`.
+
 Required repository secrets:
 
 - `VSCE_PAT` — Azure DevOps personal access token with the Marketplace **Manage** scope
