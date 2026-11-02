@@ -19,7 +19,16 @@ The workflow then tests, packages, publishes to the Visual Studio Marketplace, a
 
 Pull requests are built by [ci.yml](.github/workflows/ci.yml), which runs the tests and uploads a `.vsix` (versioned `x.y.z-pr.<PR>.<run>`) as a workflow artifact. Download it from the run's summary page and install it with `code --install-extension`.
 
-Required repository secrets:
+### Publishing credentials
 
-- `VSCE_PAT` — Azure DevOps personal access token with the Marketplace **Manage** scope
-- `OVSX_PAT` (optional) — [open-vsx.org](https://open-vsx.org) token; if set, the extension is also published to Open VSX (the namespace must be claimed once first)
+The Visual Studio Marketplace publish uses [trusted publishing](https://developer.microsoft.com/blog/trusted-publishing-visual-studio-marketplace/) (OIDC), so no Marketplace token is stored in the repository. Once per repository, create a policy on the Marketplace [publisher management page](https://marketplace.visualstudio.com/manage) (**Trusted Publishing** tab → **Create**):
+
+- **Repository owner** and **Repository** — this repository's owner and name
+- **Workflow** — `release.yml`
+- **Environment** — leave empty (the release job doesn't use one)
+
+For a private repository the policy must be used within 48 hours of creating it, or it expires.
+
+Optional repository secret:
+
+- `OVSX_PAT` — [open-vsx.org](https://open-vsx.org) token; if set, the extension is also published to Open VSX (the namespace must be claimed once first)
