@@ -33,10 +33,14 @@ jobs:
     needs: tag
     if: ${{ !cancelled() && (github.event_name == 'push' || needs.tag.result == 'success') }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      # Lets `vsce publish --oidc` request a token to authenticate with the
+      # Marketplace via a trusted publishing policy, instead of a stored PAT.
+      id-token: write
     env:
       TAG: ${{ needs.tag.outputs.tag || github.ref_name }}
       GH_TOKEN: ${{ github.token }}
-      VSCE_PAT: ${{ secrets.VSCE_PAT }}
       OVSX_PAT: ${{ secrets.OVSX_PAT }}
     steps:
       - uses: actions/checkout@v4
@@ -45,7 +49,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
       - run: npm ci
       - run: xvfb-run -a npm test
@@ -68,7 +72,7 @@ jobs:
       - name: Package
         run: npx vsce package "${TAG#v}" --no-git-tag-version --no-update-package-json
       - name: Publish to Visual Studio Marketplace
-        run: npx vsce publish -i *.vsix
+        run: npx vsce publish --oidc -i *.vsix
       - name: Publish to Open VSX
         if: env.OVSX_PAT != ''
         run: npx ovsx publish *.vsix
