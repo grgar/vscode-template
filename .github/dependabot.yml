@@ -1,0 +1,18 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      # One PR for routine bumps; major versions still get their own.
+      npm-minor-patch:
+        update-types: [minor, patch]
+    ignore:
+      # Tracks the Node.js that VS Code's extension host runs, not the CI Node.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
