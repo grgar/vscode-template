@@ -5,9 +5,13 @@ updates:
     schedule:
       interval: weekly
     groups:
-      # One PR for routine bumps; major versions still get their own.
+      # One PR for routine bumps; other major versions still get their own.
       npm-minor-patch:
         update-types: [minor, patch]
+      # These move together (eslint majors need a matching typescript-eslint).
+      lint-toolchain:
+        patterns: ["eslint", "typescript", "@typescript-eslint/*"]
+        update-types: [major]
     ignore:
       # Tracks the Node.js that VS Code's extension host runs, not the CI Node.
       - dependency-name: "@types/node"
