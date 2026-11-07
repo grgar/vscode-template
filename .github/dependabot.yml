@@ -16,3 +16,8 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    groups:
+      # Actions are pinned to major tags, so Dependabot only ever proposes
+      # majors for them, often several at once. Group all updates.
+      actions:
+        patterns: ["*"]
